@@ -1,0 +1,1 @@
+call PHP C:\servlet1\serv_ws.php

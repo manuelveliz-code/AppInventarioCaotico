@@ -1,0 +1,810 @@
+<html lang="es"><head>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script data-pace-options="{ &quot;ajax&quot;: false }" src="js/pace.min.js"></script>
+    <link rel="stylesheet" href="css/pace-theme-corner-indicator.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="icon.ico">
+    <title>Inverntario Caótico.</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="css/signin2.css" rel="stylesheet"> -->
+    <link href="css/fontawesome-all.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/sonidos.js"></script>
+    <style type="text/css">
+      html,body{height:100%}body{display:-ms-flexbox;display:-webkit-box;display:flex;-ms-flex-align:center;-ms-flex-pack:center;-webkit-box-align:center;-webkit-box-pack:center;justify-content:center;padding-top:40px;padding-bottom:40px;background-color:#ffffff}.dimensiones_app{padding-top:30px;max-width:1024PX;width:100%; "
+      }
+      /*html,body {
+      background-image: url("fondo.jpg");
+      background-color: transparent;
+      background-position: center;
+      }*/
+      .hrdelgado{
+      width: 75%
+      margin: 0em !important;
+      background-color: rgb(255, 255, 0);
+      }
+
+      .optgrande{
+      height: 6rem;
+      }
+      .table {
+      width: 100%; 
+      padding-left: 10%;
+      padding-right: 10%;
+      }
+      .fondopelota {
+      background-image: url(img/pelo.png)
+      }
+      .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: 0 auto;
+      }
+      .form-signin .checkbox {
+      font-weight: 400;
+      }
+      .form-signin .form-control {
+      position: relative;
+      box-sizing: border-box;
+      height: auto;
+      padding: 10px;
+      font-size: 16px;
+      }
+      .form-signin .form-control:focus {
+      z-index: 2;
+      }
+      .form-signin input[type="email"] {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      }
+      .form-signin input[type="password"]{margin-bottom:10px;border-top-left-radius:0;border-top-right-radius:0}@media (max-width:800px){body{display:-ms-flexbox;display:-webkit-box;align-items:baseline}.tablaresultados{padding-left:6%;padding-right:6%}.tablaresultados3{padding-left:6%;padding-right:6%}.tablaresultados2{padding-left:6%;padding-right:6%}.tabla_completa{width:100%}.table{width:100%}.navbar-toggler{font-size:.9rem}}// Medium devices (tablets,768px and up) @media (min-width:801){body{display:-ms-flexbox;display:-webkit-box;display:flex;-ms-flex-align:center;-ms-flex-pack:center;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;padding-top:40px;padding-bottom:40px;background-color:#d23e3e}.navbar-toggler{font-size:1.25rem}.tablaresultados{padding-left:1%;padding-right:1%;width:100%}.tablaresultados2{padding-left:1%;padding-right:1%;width:100%}.tabla_completa{width:100%}.table{width:100%}}
+      .custom-checkbox {
+      min-height: 1rem;
+      padding-left: 0;
+      margin-right: 0;
+      cursor: pointer;
+      margin-top: 10px;
+      }
+      .custom-checkbox .custom-control-indicator {
+      content: "";
+      display: inline-block;
+      position: relative;
+      width: 52px;
+      height: 57px;
+      background-color: #818181;
+      border-radius: 15px;
+      margin-right: 0px;
+      -webkit-transition: background .3s ease;
+      transition: background .3s ease;
+      vertical-align: middle;
+      /* margin: 0 16px; */
+      box-shadow: none;
+      }
+      .custom-checkbox .custom-control-indicator:after {
+      content: "";
+      position: absolute;
+      display: inline-block;
+      width: 22px;
+      height: 57px;
+      background-color: #f1f1f1;
+      border-radius: 22px;
+      box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+      left: -2px;
+      /* top: -4px; */
+      -webkit-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+      transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+      }
+      .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {
+      background-color: #3592f7;
+      background-image: none;
+      box-shadow: none !important;
+      }
+      .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator:after {
+      background-color: #ffffff;
+      left: 32px;
+      }
+      .custom-checkbox .custom-control-input:focus ~ .custom-control-indicator {
+      box-shadow: none !important; 
+      }
+      .editabletabla{
+      display: block;
+      width: 100%;
+      }
+      .xlistamat{
+      height: 100px;
+      }
+      .xlistnota{
+      height: 100%;
+      }
+      .cln1{
+      border-style: dashed;
+      border-width: 3px;
+      border-bottom:none;
+      }
+      .cln2{
+      border-style: dashed;
+      border-width: 3px;
+      border-top: none;
+      }
+      .clprio{
+      border-style: dashed;
+      border-width: 3px;
+      background: repeating-linear-gradient( 
+      135deg, 
+      rgba(255, 255, 255, 0.3) 20px, 
+      rgba(255, 255, 255, 0.3) 50px, 
+      rgb(211, 235, 255) 40px, 
+      rgb(211, 235, 255) 60px );
+      }
+      .oculto{
+      display: none;
+      }
+      .fuentepeque{
+      font-size: 0.9em;
+      }
+      .btn-warning {
+      color: #212529;
+      background-color: #ffd760;
+      border-color: #ffc107;
+      }
+      .appfull{
+      width: 99%;
+      }
+      .txtizq{
+      text-align: left;
+      padding-left: 15px;
+      }
+      .txtder{
+      text-align: right;
+      padding-right: 15px;
+      }
+      .tareaTI{
+      border-radius: 10px;background: rgb(214, 221, 232);
+      }
+      .tareaTA{
+      border-radius: 10px;background: rgb(232, 223, 214);
+      }
+      .desabilitado{
+      pointer-events: none;
+      opacity: 0.4;
+      }
+      .vertical {
+      writing-mode: vertical-lr;
+      transform: rotate(90deg);
+      text-align: center;
+      }
+      .bg-card {
+      background-size: contain;
+      background-position: right;
+      }
+      .bg-holder {
+      position: absolute;
+      width: 100%;
+      min-height: 100%;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      will-change: transform,opacity,filter;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      background-repeat: no-repeat;
+      z-index: 0;
+      }
+      .fondo1{
+      background-image:url(img/corner-2.png);
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      will-change: transform,opacity,filter;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      background-repeat: no-repeat;
+      z-index: 0;
+      }
+      .INFASA{
+      /*background-image:url(img/naranja.png);*/
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      will-change: transform,opacity,filter;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      background-repeat: no-repeat;
+      z-index: 0;
+      /*background-color: rgb(244, 241, 241);
+      background-color: #F1D600;*/
+      background-color: #ffd760;
+      border-color: #ffc107;
+      border-radius: .5rem;
+      }
+      .INFASADET{
+      background-color: rgb(244, 241, 241); 
+      }
+      .DIGELASA{
+      /*background-image:url(img/verde.png);*/
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+      /*overflow: hidden;*/
+      will-change: transform,opacity,filter;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      background-repeat: no-repeat;
+      z-index: 0;
+      /*background-color: rgb(218, 243, 237);*/
+      background-color: rgb(52, 58, 64);
+      border-radius: .5rem;
+      }
+      .bgDIGELASA{
+      background-color: rgb(52, 58, 64);
+      }
+      .bgINFASA{
+      background-color: #ffd760;
+      }
+      .txtDIGELASA{
+      color:white;
+      }
+      .txtINFASA{
+      }
+      .DIGELASADET{
+      background-color: rgb(218, 243, 237);
+      }
+      .margen15{
+      width: 95%;
+      }
+      .semitransparente{
+      background-color: rgba(255, 255, 255, 0.75);
+      }
+      .card{
+      border-radius: .5rem; 
+      }
+      .linea {
+      margin:0px 20px;
+      width:90px;    
+      border-top:1px solid #999;
+      position: relative;
+      top:10px;
+      float:left;
+      }
+      .leyenda {
+      font-weight:bold;
+      float:left;
+      }
+      hr.separador {
+      border: 0;
+      height: 1px;
+      width: 73%;
+      }
+      hr.separador:after {
+      /*content: "Liquidos";*/
+      content: " (" attr(tipoproducto) ")";
+      display: inline-block;
+      position: relative;
+      top: -0.9em;
+      /* font-size: 1.5em; */
+      padding: 0 0.25em;
+      background: #343a40;
+      }
+      .hrINFASA{
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+      }
+      .hrINFASA:after {
+      /*background: #ffd75;
+      color: white;*/
+      background: #ffd75f!important;
+      }
+
+      hr.hrDIGELASA{
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0))!important;
+      color: white;
+      }
+      hr.hrDIGELASA:after {
+      background: #343a40;
+      color: white!important;
+      }
+
+
+      hr.hrgeneral{
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))!important;
+      color: white;
+      border-top: 1px solid rgba(255, 255, 255, 0.88)!important;
+      }
+      hr.hrgeneral:after {
+       background: #ffd75f!important;
+      color: white!important;
+      }
+
+
+      .alertify .ajs-footer {
+      background: #484d51!important;
+      border-top: #646464 1px solid!important;
+      border-radius: 0 0 2px 2px!important;
+      }
+      .alertify .ajs-header {
+        color: #fff!important;
+        font-weight: 700!important;
+        background: #484d51!important;
+        border-bottom: #646464 1px solid!important;
+        border-radius: 2px 2px 0 0!important;
+      }
+      .alertify .ajs-footer .ajs-buttons .ajs-button {
+        background-color: transparent!important;
+        color: #ffd75f!important;
+        border: 0!important;
+        font-size: 14px!important;
+        font-weight: 700!important;
+        text-transform: uppercase!important;
+      }
+      .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok {
+          color: #3593d2!important;
+      }
+      .alertify .ajs-dialog {
+          background-color: #484d51!important;
+          -webkit-box-shadow: 0 15px 20px 0 rgba(0,0,0,.25)!important;
+          box-shadow: 0 15px 20px 0 rgba(0,0,0,.25)!important;
+          border-radius: 2px!important;
+      }
+      .alertify .ajs-body {
+          color: #fff!important;
+      }
+      .enMoney::before {
+          content:"";
+      }
+      .negMoney {
+          color:red;
+      }
+      .pickeado{
+        /*color:red!important;
+        background-color: #000!important;*/
+        /*color: #00000061!important;*/
+        color: rgba(0, 0, 0, 0.3803921568627451)!important;
+    
+          /*background-color: #b5b5b50f!important;*/
+          background-color: rgba(218, 218, 218, 0.058823529411764705)!important;
+      }
+      .pickeado h5{
+        /*color:red!important;
+        background-color: #000!important;*/
+        /*color: #00000061!important;*/
+        color: rgba(0, 0, 0, 0.3803921568627451)!important;
+          /*background-color: #b5b5b50f!important;*/
+          background-color: rgba(218, 218, 218, 0.058823529411764705)!important;
+      }
+
+      .seleccionado{
+        border-style: solid;
+          border-color: black;
+          border-width: 1px;
+          filter: invert(100%);
+          -webkit-filter: invert(100%);
+      }
+      /*
+      .pastel1{
+        background-color: #FEC8D8;
+      }
+      .pastel2{
+        background-color: #D291BC;
+      }
+      .pastel3{
+        background-color: #957DAD;
+      }
+      .pastel4{
+        background-color: #E0BBE4;
+      }**/
+    </style>
+  </head>
+  <body class="text-center pace-done "><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+    <div id="menug">
+      <script type="text/javascript" src="js/ajax7.js"></script>
+      <nav class="navbar fixed-top navbar-dark bg-dark">
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> Hola
+            <span id="nickenc"> </span> CRISTIAN GOMEZ
+          </button>
+        <!-- -->
+        <button class=" btn btn-warning" type="button" id="btnseleop"><span class="fas fa-exchange-alt"></span></button>
+        <button class=" btn btn-success btnrefresh" type="button" id="btnrefresh"><span class="fas fa-sync-alt"></span></button>
+         <!-- <button class=" btn btn-danger btnsalir"  type="button" id="btnsalir" ><span class="fas fa-times-circle"></span></button>
+         - -->
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 nav navbar-nav nav-collapse collapse">
+              <li class="nav-item active">
+                <a class="nav-link links_menu" id="mnseleop" data-toggle="collapse"><span class="fas fa-exchange-alt"> </span> Cambiar Operacion <span class="sr-only"></span></a>
+              </li>
+              <!--<li class="nav-item ">
+                <a class="nav-link links_menu" id="mnselelote" data-toggle="collapse"><span class="fas fa-shopping-cart"> </span> Salir a menú principal <span class="sr-only"></span></a>
+              </li>-->
+              <li class="nav-item ">
+                <a class="nav-link links_menu btnrefresh" id="mnactualizar" data-toggle="collapse"><span class="fas fa-sync-alt"> </span> Actualizar <span class="sr-only"></span></a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link links_menu " id="mnfullscreen" data-toggle="collapse"><span class="fas fa-expand"> </span> Pantalla completa <span class="sr-only"></span></a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link links_menu" id="mnsalir"><span class="fas fa-times-circle"> </span> Salir</a>
+              </li>
+            </ul>
+        </div>
+        <!-- -->
+      </nav>
+
+</div>
+    <div class="dimensiones_app">
+      <div id="contenidopg">      
+        
+
+        <div class=" container card mb-3  margen15 " style="padding-top: 15px;" >
+          <div class="row ">
+            <div class="col">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Ubicar pedido" aria-label="Ubicar Pedido" aria-describedby="basic-addon1">
+              </div>
+              
+            </div>
+            <div class="col">
+                 <button type="button" class="btn btn-block  btn-success" id= "btnnuevogrupo">Nuevo.Grupo</button>
+            </div>
+          </div>
+        </div>
+        <div id= "detallegrupo">
+          <div class="btncargartarea_seleccionagrupo container card mb-3 DIGELASA margen15 " empresa="DIGELASA" >
+            <div class="row ">
+              <div class="col">
+                <div class=" txtizq"><h3 class="text-info">Grupo ID: #1454</h3></div>
+              </div>
+              <div class="col">
+                <div class=" txtder "><h5 class="text-primary">Inicio: 08/08/2019</h5></div>
+              </div>
+            </div>
+           <div class="row">
+              <div class="col txtizq txtDIGELASA">
+                <h6>Facturas :</h6>
+              </div>
+             
+            </div>
+            <!-- linea 1-->
+            <div class="row">
+              <div class="col txtizq txtDIGELASA">
+                <h4> FAC000855</h4> 
+              </div>
+              <div class="col txtizq txtDIGELASA">
+                <h4><i class="fas fa-shopping-cart"></i> 5</h4> 
+              </div>
+              <div class="col txtizq txtDIGELASA">
+                <h4> FAC000835</h4> 
+              </div>
+              <div class="col txtizq txtDIGELASA">
+                <h4><i class="fas fa-shopping-basket"></i> 1</h4> 
+              </div>
+            </div>
+            <!-- linea 2-->
+             <div class="row">
+              <div class="col txtizq txtDIGELASA">
+                <h4> FAC000485</h4> 
+              </div>
+              <div class="col txtizq txtDIGELASA">
+                <h4><i class="fas fa-shopping-basket"></i> 2</h4> 
+              </div>
+              <div class="col txtizq txtDIGELASA">
+                <h4> FAC080825</h4> 
+              </div>
+              <div class="col txtizq txtDIGELASA">
+                <h4><i class="fas fa-shopping-basket"></i> 10</h4> 
+              </div>
+            </div>
+            <!-- linea 3-->
+             <div class="row">
+              <div class="col txtizq txtDIGELASA">
+                <h4> FAC00786</h4> 
+              </div>
+              <div class="col txtizq txtDIGELASA">
+                <h4><i class="fas fa-shopping-basket"></i> 15</h4> 
+              </div>
+              <div class="col txtizq txtDIGELASA">
+                <h4> FAC004831</h4> 
+              </div>
+              <div class="col txtizq txtDIGELASA">
+                <h4><i class="fas fa-shopping-basket"></i> 17</h4> 
+              </div>
+              <!-- linea 4-->
+            </div>
+            <div class="row">
+              <div class="col txtizq txtDIGELASA">
+                <h6></h6><h6></h6>
+              </div>
+              <div class="col txtder  txtDIGELASA">
+                <span class="text-muted">Estatus:</span><h6>Sin iniciar</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Conteniddo oculto -->
+      <div id="contenidopg_oculto" class="oculto">
+       
+
+
+        <div class="btncargartarea_nuevogrupo container card mb-3 DIGELASA margen15 " empresa="DIGELASA" grupo = "0" id= "modelogruponuevo" >
+          <div class="row ">
+            <div class="col">
+              <div class=" txtizq"><h3 class="text-info">Grupo ID: #1454</h3></div>
+            </div>
+            <div class="col">
+              <div class=" txtder "><h5 class="text-primary">Inicio: 08/08/2019</h5></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col txtizq txtDIGELASA">
+              <h6>Facturas :</h6>
+            </div>
+           
+          </div>
+          <!-- linea 1-->
+         
+          <!-- linea 2-->
+          
+          <!-- linea 3-->
+           
+          <div class="row">
+            <div class="col txtizq txtDIGELASA">
+              <h6></h6><h6> </h6>
+            </div>
+            <div class="col txtder  txtDIGELASA">
+              <span class="text-muted">Estatus:</span><h6>En proceso</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- fin Contenido oculto -->
+      <div id="contenidopg_deshabilitado" class="desabilitado">
+      </div>
+      <!-- <a href="tel:150"><button type="button" class="btn btn-info btn-lg btn-block"><i class="fa fa-mobile"> </i> Llamar</button></a> -->
+      <div id="infasapie"><img src="img/001.png" alt="INFASA" width="150"></div>
+      <br>
+    </div>
+    <div id="cuadromodal">
+      <div class="modal fade" id="modalcalc" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div id="sumaprod"></div>
+              <div id="objetollama" idobjeto="xxx"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ------------------- cuadro modal detalle ------------------------------->
+
+    <!--------------------------------CUADRO MODAL DETALLE TARIMAS ------------------------------->
+    <div id="cuadromodal_detalle4">
+      <div class="modal fade" id="modal_detalletarea4" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <!--   <button type="button" class="danger close" data-dismiss="modal">&times;</button>-->
+            <div id="detalle_tarea4" class="modal-body">
+            </div>
+            
+            <div class=" mb-3 " style="width: 90%; align-items: center; align-items: center; align-self: center;">
+              <div class="row">
+                <div class="col txtizq">
+                  <button type="button" class="btn btn-secondary btn-block btn-lg" data-dismiss="modal">Cancelar</button>
+                </div>
+                <div class="col txtder">
+                  <button type="button" class="btn btn-primary   btn-block btn-lg" id="btn_guardar_detalle_tarima">Confirmar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--------------------------------CUADRO MODAL AGREGA # CONTROL-------------------------------->
+    <div id="cuadromodal_detalle">
+      <div class="modal fade" id="modal_detalletarea" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <button type="button" class="danger close bg-danger" data-dismiss="modal">×</button>
+            <div id="detalle_tarea" class="modal-body">
+            </div>
+            <div class="input-group mb-3" style="width: 90%; align-items: center; align-items: center; align-self: center;">
+              <input type="text" class="form-control btn-lg" placeholder="Ubicación" aria-label="txtingresobarra" aria-describedby="basic-addon2" id="txtingresobarra">
+              <div class="input-group-append">
+                <button class="btn btn-lg btn-primary" type="button" id="btn_guardar_posicion">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ------------------- cuadro modal detalle ------------------------------->
+    <!--------------------------------CUADRO MODAL detalle traslado-------------------------------->
+    <div id="cuadromodal_detalle3">
+      <div class="modal fade" id="modal_detalletarea3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <!--   <button type="button" class="danger close" data-dismiss="modal">&times;</button>-->
+
+            <div id="detalle_tarea3" class="modal-body">
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div> -->
+            <div class=" mb-3 " style="width: 90%; align-items: center; align-items: center; align-self: center;">
+              <div class="row">
+                <div class="col txtizq">
+                  <button type="button" class="btn btn-secondary btn-block btn-lg" data-dismiss="modal">Cancelar</button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--------------------------------CUADRO TRASLADOS-------------------------------->
+    <div id="cuadromodal_detalle2">
+      <div class="modal fade" id="modal_detalletarea2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <!--   <button type="button" class="danger close" data-dismiss="modal">&times;</button>-->
+            <div id="detalle_tarea2" class="modal-body">
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div> -->
+            <div class=" mb-3 " style="width: 90%; align-items: center; align-items: center; align-self: center;">
+              <div class="row">
+                <div class="col txtizq">
+                  <button type="button" class="btn btn-secondary btn-block btn-lg" data-dismiss="modal">Cancelar</button>
+                </div>
+                <div class="col txtder">
+                  <button type="button" class="btn btn-primary   btn-block btn-lg" id="btn_guardar_detalle">Confirmar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--------------------------------CUADRO MODAL AGREGA # de contenedor (canasta / carreta etc)-------------------------------->
+    <div id="cuadromodal2">
+      <div class="modal fade" id="modalcontenedor" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body" id= "lista_contenedores">
+            </div>  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- -------------------------------->
+    <div id="botonflotante">
+      <!--------------------------------CUADRO MODAL AGREGA # CONTROL-------------------------------->
+      <div id="cuadromodal4">
+        <div class="modal fade" id="modalnotificacion" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <ul class="list-group" id="lista_controles_enc">
+                  <li href="#" class="list-group-item list-group-item">
+                    Cargado correctamente
+                  </li>
+                </ul>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="tono" lote="" codigo="" modifica="">
+                Aceptar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- -------------------------------->
+    <!-- -------------------------------->
+    <div id="jquery_lista"></div>
+    <!-- -------------------------------->
+    <script>
+      var tarea_consulta= null;
+      var tarea_consulta2= null;
+      function closeFullscreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+      }
+      function openFullscreen() {
+      var elem = document.documentElement;        
+      if (elem.requestFullscreen) {
+       elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+       elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+       elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+       elem.msRequestFullscreen();
+      }
+      }
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      //  detalle_tarea2();
+        $("#cmdaddlista").click(function(evento) {
+          var datonuevoelemento= $("#controlme").val();
+          if (datonuevoelemento>0){
+            $("#controlme").val("");
+            var nuevoelemento= '<li class="list-group-item d-flex justify-content-between align-items-center" id= "ME'+ datonuevoelemento+'">ME'+datonuevoelemento+'<button class="btn btn-outline-danger fas fa-minus cmdeliminarlst" type="button"  idlst= "ME'+ datonuevoelemento+'"></button></li>';
+            $("#lista_controles").append(nuevoelemento);
+            var funcelim= '<script type="text/javascript">$(document).ready(function() {$(".cmdeliminarlst").click(function(evento) {var idlisteliminar= $(this).attr("idlst");$("#"+idlisteliminar).remove();});}); </'+'script>'
+            $("#jquery_lista").html(funcelim);
+          }
+        });
+        $(".cmdeliminarlst").click(function(evento) {
+          var idlisteliminar= $(this).attr("idlst");
+          $("#"+idlisteliminar).remove();
+        }); 
+      });
+    </script>
+    <script type="text/javascript" src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/ajax7.js"></script>
+    <link rel="stylesheet" href="js/alertify/css/alertify.min.css">
+    <!-- include a theme -->
+    <link rel="stylesheet" href="js/alertify/css/themes/default.min.css">
+    <script src="js/alertify/alertify.min.js"></script>
+    <link rel="stylesheet" href="calc/SimpleCalculadorajQuery.css">
+    <script src="calc/SimpleCalculadorajQuery.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        //$(document).ajaxStart(function(){Pace.restart(); });
+        //window.clearInterval(tarea_consulta);
+        //cargapagina();
+        //tarea_consulta=setInterval(cargapagina, 20000); 
+        cunicolist=[];
+        clasempresa="";
+      });
+    </script>
+  
+</body></html>
