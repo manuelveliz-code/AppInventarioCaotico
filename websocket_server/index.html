@@ -1,0 +1,91 @@
+<html><head><title>Infasa</title>
+<style type="text/css">
+html,body {
+	font:normal 0.9em arial,helvetica;
+}
+#log {
+	width:600px; 
+	height:300px; 
+	border:1px solid #7F9DB9; 
+	overflow:auto;
+}
+#msg {
+	width:400px;
+}
+</style>
+<script type="text/javascript">
+var socket;
+
+function init() {
+	var host = "ws://10.32.9.8:9000?canal=TA"; // SET THIS TO YOUR SERVER
+	try {
+		socket = new WebSocket(host);
+		log('Conexion - estfatus '+socket.readyState);
+		socket.onopen    = function(msg) { 
+							   //console.log("Bienvenido - Estatus "+this.readyState); 
+						   };
+		socket.onmessage = function(msg) { 
+							   log(msg.data);
+							   console.log(msg);
+
+						   };
+		socket.onclose   = function(msg) { 
+							   console.log("Desconectado - Estatus "+this.readyState); 
+							   };
+	}
+	catch(ex){ 
+		log(ex); 
+	}
+	$("msg").focus();
+}
+
+function send(){
+	var txt,msg;
+	txt = $("msg");
+	msg = txt.value;
+	//socket.transmitir("hola");
+	console.log("transmision: " + msg);
+	if(!msg) { 
+		alert("Mensaje vacio"); 
+		return; 
+	}
+	txt.value="";
+	txt.focus();
+	try { 
+		socket.send(msg); 
+	
+		
+		//log('Enviado: '+msg); 
+	} catch(ex) { 
+		log(ex); 
+	}
+}
+function quit(){
+	if (socket != null) {
+		log("Salida!");
+		socket.close();
+		socket=null;
+	}
+}
+
+function reconnect() {
+	quit();
+	init();
+}
+
+// Utilities
+function $(id){ return document.getElementById(id); }
+function log(msg){ $("log").innerHTML+="<br>"+msg; }
+function onkey(event){ if(event.keyCode==13){ send(); } }
+</script>
+
+</head>
+<body onload="init()">
+<h3>Chat Infasa</h3>
+<div id="log"></div>
+<input id="msg" type="textbox" onkeypress="onkey(event)"/>
+<button onclick="send()">Enviar</button>
+<button onclick="quit()">Salir</button>
+<button onclick="reconnect()">Reconectar</button>
+</body>
+</html>
